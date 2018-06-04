@@ -8,19 +8,21 @@ import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.xml.XmlTest;
 
 import pers.hhelibep.Bestful.core.ApiMethodInterceptor;
-import pers.hhelibep.Bestful.test.RetryTest;
-import pers.hhelibep.Bestful.util.Properties;
 
 public class BaseTest {
 	protected Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
 	@BeforeSuite
 	public void beforeSuite(ITestContext context) {
+		XmlTest xmlTest = new XmlTest();
+		// context.getSuite().getXmlSuite().addTest(xmlTest);
 		// add retry analyzer for each test method
 		for (ITestNGMethod method : context.getAllTestMethods()) {
-			method.setRetryAnalyzer(new RetryTest(Integer.parseInt(Properties.getValue("retryCount"))));
+			// method.setRetryAnalyzer(new
+			// RetryTest(Integer.parseInt(Properties.getValue("retryCount"))));
 		}
 	}
 

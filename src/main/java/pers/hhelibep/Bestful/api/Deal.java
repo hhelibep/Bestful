@@ -9,8 +9,9 @@ import pers.hhelibep.Bestful.http.IResponse;
 import pers.hhelibep.Bestful.util.Properties;
 
 public class Deal implements IApi {
+	private static final String API_PATH = "/path/to/api";
 	// this is mandatory, you must set the root path for this api
-	private static final String ROOT_PATH = Properties.getValue("defaultHost") + "/path/to/api";
+	private static final String ROOT_PATH = Properties.getValue("defaultHost") + API_PATH;
 
 	/**
 	 * this is a standard request definition. what you need to provide:

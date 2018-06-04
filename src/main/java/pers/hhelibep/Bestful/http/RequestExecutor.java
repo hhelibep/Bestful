@@ -31,7 +31,7 @@ public class RequestExecutor {
 			e.printStackTrace();
 		}
 		post.releaseConnection();
-		return JSONResponse.fromResponse(response);
+		return BasicResponse.fromResponse(response);
 	}
 
 	public static IResponse put(String url, HttpEntity putEntity, Header... headers) {
@@ -48,7 +48,7 @@ public class RequestExecutor {
 			e.printStackTrace();
 		}
 		put.releaseConnection();
-		return JSONResponse.fromResponse(response);
+		return BasicResponse.fromResponse(response);
 	}
 
 	public static IResponse get(String url, Header... headers) {
@@ -63,7 +63,7 @@ public class RequestExecutor {
 			e.printStackTrace();
 		}
 		get.releaseConnection();
-		return JSONResponse.fromResponse(response);
+		return BasicResponse.fromResponse(response);
 	}
 
 	public static IResponse delete(String url, Header... headers) {
@@ -78,7 +78,7 @@ public class RequestExecutor {
 			e.printStackTrace();
 		}
 		delete.releaseConnection();
-		return JSONResponse.fromResponse(response);
+		return BasicResponse.fromResponse(response);
 	}
 
 }
