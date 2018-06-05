@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,8 +24,6 @@ public class BasicResponse implements IResponse {
 	private HttpResponse response;
 	private String rawString;
 	private File file;
-
-	private static final ThreadLocal<HashMap<Class<?>, Object>> RESPONSE_OBJECT_CACHE = new ThreadLocal<>();
 
 	private BasicResponse(HttpResponse response) {
 		this.response = response;
@@ -70,14 +67,6 @@ public class BasicResponse implements IResponse {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getResponseByClass(Class<T> clazz) {
-		HashMap<Class<?>, Object> cache = RESPONSE_OBJECT_CACHE.get();
-		if (null == cache) {
-			cache = new HashMap<>();
-			RESPONSE_OBJECT_CACHE.set(cache);
-		}
-		if (null != cache.get(clazz)) {
-			return (T) cache.get(clazz);
-		}
 		if (null == rawString) {
 			try {
 				rawString = EntityUtils.toString(this.entity);
@@ -89,7 +78,6 @@ public class BasicResponse implements IResponse {
 		try {
 			Constructor<T> cons = clazz.getConstructor(String.class);
 			T instance = cons.newInstance(rawString);
-			cache.put(clazz, instance);
 			return instance;
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
