@@ -1,5 +1,5 @@
 package pers.hhelibep.Bestful.core;
 
 public enum AuthType {
-	Base64, Magic
+    Base64, Magic,Salted
 }

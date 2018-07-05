@@ -8,17 +8,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public interface IResponse {
-	Logger logger = LoggerFactory.getLogger(IResponse.class);
+    Logger logger = LoggerFactory.getLogger(IResponse.class);
 
-	int getResponseStatusCode();
+    int getResponseStatusCode();
 
-	String getReason();
+    String getReason();
 
-	HttpResponse getRawResponse();
+    HttpResponse getRawResponse();
 
-	HttpEntity getResponseEntity();
+    HttpEntity getResponseEntity();
 
-	<T> T getResponseByClass(Class<T> clazz);
+    <T> T getResponseByClass(Class<T> clazz);
 
-	File saveResponseAsFile(File file);
+    File saveResponseAsFile(File file);
 }
